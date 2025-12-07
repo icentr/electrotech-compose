@@ -20,6 +20,7 @@ services:
       - .env
   nginx:
     image: nginx:1.23.3
+    restart: always
     depends_on:
       - front
       - back
@@ -33,7 +34,7 @@ services:
       - "80:80"
       - "443:443"
   certbot:
-    image: certbot/certbot
+    image: certbot/certbot:latest
     depends_on:
       - nginx
     volumes:
