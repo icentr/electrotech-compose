@@ -1,6 +1,6 @@
 services:
   back:
-    build: git://github.com/Katy248/electrotech.git#main
+    build: https://github.com/Katy248/electrotech.git
     volumes:
       - data:/data
       - database:/database.sqlite3
@@ -11,7 +11,7 @@ services:
     env_file:
       - .env
   front:
-    build: git://github.com/icentr/electrotech-front#main
+    build: https://github.com/icentr/electrotech-front.git
     ports:
       - "80:3000"
 
