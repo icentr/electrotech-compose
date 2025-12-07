@@ -1,0 +1,16 @@
+## Env variables
+
+Put them into `.env`
+
+- `JWT_SECRET` - randomly generated string
+- `DB_CONNECTION` - connection string, has no default value but only uses as path in container, so leave just _`/database.sqlite3`_
+- `FTP_USERNAME` - ftp username
+- `FTP_PASSWORD` - ftp password
+- `FTP_PUBLIC_IP` - public IP of the server, currently `80.87.193.226`
+- `MAIL_ENABLE` - true/false
+- `MAIL_PORT` - default 587
+- `MAIL_USER` - email in form `somebody@domain.ru`
+- `MAIL_HOST` - mail host, for example: `smtp.email.ru`
+- `MAIL_PASSWORD` - mail password
+- `MAIL_INFO_RECEIVER` - just email
+- `MAIL_INFO_SENDER` - UTF-8 string with sender name for all emails sended from server
