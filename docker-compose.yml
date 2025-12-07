@@ -3,7 +3,7 @@ services:
     build: https://github.com/Katy248/electrotech.git
     volumes:
       - data:/data
-      - database:/database.sqlite3
+      - database:/
     ports:
       - "8080:8080"
       - "8021:8021"
@@ -26,5 +26,5 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: "/database.sqlite3"
+      device: "/var/database"
       o: bind
