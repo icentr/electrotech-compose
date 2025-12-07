@@ -22,3 +22,9 @@ Put them into `.env`
 * `NUXT_PUBLIC_API_BASE` - base url of the api, for example
 * `DOMAIN_EMAIL` - your domain email, needs for certificates
 * `DOMAIN_URL` - your domain, needs for certificates
+
+
+[source,bash]
+----
+docker compose run --rm certbot certonly --webroot --webroot-path /var/www/certbot/ -d example.org
+----
