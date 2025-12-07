@@ -2,4 +2,4 @@
 
 restart:
 	docker compose down
-	docker compose up --detach --build
+	docker compose --env-file .env up --detach --build
