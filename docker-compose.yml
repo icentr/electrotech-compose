@@ -12,12 +12,17 @@ services:
       - .env
   front:
     build: https://github.com/icentr/electrotech-front.git
+    depends_on:
+      - back
     ports:
       - "3000:3000"
     env_file:
       - .env
   nginx:
     image: nginx:1.23.3
+    depends_on:
+      - front
+      - back
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/cert.pem:/etc/cert.pem
