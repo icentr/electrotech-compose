@@ -19,8 +19,10 @@ volumes:
   data:
     driver: local
     driver_opts:
+      type: none
       device: "/var/data"
   database:
     driver: local
     driver_opts:
+      type: none
       device: "/database.sqlite3"
