@@ -16,3 +16,4 @@ Put them into `.env`
 - `MAIL_PASSWORD` - mail password
 - `MAIL_INFO_RECEIVER` - just email
 - `MAIL_INFO_SENDER` - UTF-8 string with sender name for all emails sended from server
+- `NUXT_PUBLIC_API_BASE` - base url of the api, for example
