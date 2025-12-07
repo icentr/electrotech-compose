@@ -1,4 +1,6 @@
-## Env variables
+= Compose for link:http://shop-icentr.pro[electrotech]
+
+== Env variables
 
 Put them into `.env`
 
