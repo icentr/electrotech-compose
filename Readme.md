@@ -3,7 +3,7 @@
 Put them into `.env`
 
 - `JWT_SECRET` - randomly generated string
-- `DB_CONNECTION` - connection string, has no default value but only uses as path in container, so leave just _`/database.sqlite3`_
+- `DB_CONNECTION` - connection string, has no default value but only uses as path in container, so leave just _`/database/database.sqlite3`_
 - `FTP_USERNAME` - ftp username
 - `FTP_PASSWORD` - ftp password
 - `FTP_PUBLIC_IP` - public IP of the server, currently `80.87.193.226`
