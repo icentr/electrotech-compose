@@ -1,6 +1,7 @@
 services:
   back:
     build: https://github.com/Katy248/electrotech.git
+    restart: unless-stopped
     volumes:
       - data:/data
       - database:/database
@@ -12,6 +13,7 @@ services:
       - .env
   front:
     build: https://github.com/icentr/electrotech-front.git
+    restart: unless-stopped
     depends_on:
       - back
     ports:
