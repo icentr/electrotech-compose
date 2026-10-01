@@ -9,11 +9,24 @@ services:
       - "8021:8021"
       - "30000-30020:30000-30020"
     environment:
-      EL_PORT: "${PORT:-8080}"
+      # do not configure
       EL_CATALOG_DATA_DIR: "/data"
-      EL_AUTH_SECRET: "${AUTH_SECRET}"
-      EL_DB_CONNECTION_STRING: "${DB_CONNECTION_STRING:-/database/database.sqlite3}"
       EL_DB_AUTO_MIGRATE: true
+      # configuration needs to edit dependencies
+      EL_PORT: "${PORT:-8080}"
+      EL_DB_CONNECTION_STRING: "${DB_CONNECTION_STRING:-/database/database.sqlite3}"
+      # configure via .env
+      EL_AUTH_SECRET: "${AUTH_SECRET}"
+      EL_FTP_USERNAME: "${FTP_USERNAME}"
+      EL_FTP_PASSWORD: "${FTP_PASSWORD}"
+      EL_FTP_PUBLIC_IP: "${FTP_PUBLIC_IP}"
+      EL_MAIL_HOST: "${MAIL_HOST}"
+      EL_MAIL_PORT: "${MAIL_PORT}"
+      EL_MAIL_USERNAME: "${MAIL_USERNAME}"
+      EL_MAIL_PASSWORD: "${MAIL_PASSWORD}"
+      EL_MAIL_INFO_RECEIVER: "${MAIL_INFO_RECEIVER}"
+      EL_MAIL_INFO_SENDER: "${MAIL_INFO_SENDER}"
+
 
     networks:
       - default
