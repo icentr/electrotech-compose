@@ -6,66 +6,57 @@ services:
       - data:/data
       - database:/database
     ports:
-      - "8080:8080"
       - "8021:8021"
       - "30000-30020:30000-30020"
-    env_file:
-      - .env
+    environment:
+      EL_PORT: "${PORT:-8080}"
+      EL_CATALOG_DATA_DIR: "/data"
+      EL_AUTH_SECRET: "${AUTH_SECRET}"
+      EL_DB_CONNECTION_STRING: "${DB_CONNECTION_STRING:-/database/database.sqlite3}"
+      EL_DB_AUTO_MIGRATE: true
+
+    networks:
+      - default
+
   front:
     build: https://github.com/icentr/electrotech-front.git
     restart: unless-stopped
     depends_on:
       - back
-    ports:
-      - "3000:3000"
-    env_file:
-      - .env
-  nginx:
-    image: nginx:1.23.3
-    restart: always
+    environment:
+      NUXT_PUBLIC_API_BASE: "${API_BASE_URL}"
+    networks:
+      - default
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
     depends_on:
-      - front
       - back
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      # - ./nginx/cert.pem:/etc/cert.pem
-      # - ./nginx/key.pem:/etc/key.pem
-      - ./certbot/www:/var/www/certbot/:ro
-      - ./certbot/conf/:/etc/nginx/ssl/:ro
+      - front
     ports:
       - "80:80"
       - "443:443"
-  certbot:
-    image: certbot/certbot:latest
-    depends_on:
-      - nginx
     volumes:
-      - ./certbot/www/:/var/www/certbot/:rw
-      - ./certbot/conf/:/etc/letsencrypt/:rw
-  # certbot:
-  #   ports:
-  #     - "6000:80"
-  #   env_file:
-  #     - .env
-  #   volumes:
-  #     - ./nginx/:/etc/nginx/
-  #   build:
-  #     context: ./certbot
-  #     dockerfile: Dockerfile
-  #     args:
-  #       DOMAIN_EMAIL: ${DOMAIN_EMAIL}
-  #       DOMAIN_URL: ${DOMAIN_URL}
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    networks:
+      - default
 
 volumes:
   data:
     driver: local
     driver_opts:
       type: none
-      device: "/var/data"
+      device: "${DATA_DIR}"
       o: bind
   database:
     driver: local
     driver_opts:
       type: none
-      device: "/var/database"
+      device: "${DB_DIR}"
       o: bind
+
+networks:
+  default:
+    driver: bridge
